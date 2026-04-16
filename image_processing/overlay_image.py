@@ -69,7 +69,7 @@ def detect_buoys(image):
     draw_bounding_box(image, green_mask, (0, 255, 0))
     draw_bounding_box(image, red_mask, (0, 0, 255))
 
-def get_camera_position(intertag_dist = 1, tag1, tag2):
+def get_camera_position(tag1, tag2,intertag_dist = 1):
     angle = np.acos((intertag_dist**2 + tag1**2 + tag2**2 )/ (2 * tag1 * tag2))
     # Herons Formula
     s = 1/2 * (intertag_dist + tag1 + tag2)
@@ -83,6 +83,7 @@ def main():
     for cam_info in enumerate_cameras():
         if "EMEET" in cam_info.name:
             cap = cv2.VideoCapture(cam_info.index)
+            print("EMEET CAMERA FOUND")
             break
 
     if not cap:
