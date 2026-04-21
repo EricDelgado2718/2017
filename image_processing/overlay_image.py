@@ -82,12 +82,11 @@ def main():
     cap = False
     for cam_info in enumerate_cameras():
         if "EMEET" in cam_info.name:
-            cap = cv2.VideoCapture(cam_info.index)
+            cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
             print("EMEET CAMERA FOUND")
             break
 
-    if not cap:
-        raise Error("EMEET Camera not found")
+    assert(cap)
 
     if not cap.isOpened():
         print("Cannot open camera")
